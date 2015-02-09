@@ -26,6 +26,13 @@ body {
 
 }
 
+.infoPane {
+  background-color: red;
+  width: 5%;
+  height: 100%;
+  padding-top: 30px;
+  position
+}
 
 /*.welcome{
   width: 500px;
