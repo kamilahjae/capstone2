@@ -2,13 +2,14 @@
 lock '3.3.5'
 
 set :application, 'capstone'
-set :repo_url, 'git@example.com:kamilahjae/capstone2.git'
+set :repo_url, 'git@github.com:kamilahjae/capstone2.git'
 
+set :use_sudo, false
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, '/var/www/my_app_name'
+set :deploy_to, '/var/www/capstone'
 
 # Default value for :scm is :git
 # set :scm, :git
