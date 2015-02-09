@@ -28,10 +28,9 @@ body {
 
 .infoPane {
   background-color: red;
-  width: 5%;
+  width: 30%;
   height: 100%;
-  padding-top: 30px;
-  position
+  position: absolute;
 }
 
 /*.welcome{
