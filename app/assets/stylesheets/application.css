@@ -14,7 +14,7 @@
  *= require_self
  */
 .navbar{
-  background-color: #2E2E2E;
+  background-color: #151818;
   font: #fff;
 }
 
@@ -27,7 +27,7 @@ body {
 }
 
 .infoPane {
-  background-color: red;
+  background-color: #293435;
   width: 30%;
   height: 100%;
   position: absolute;
@@ -51,4 +51,29 @@ body {
   top: 50%;
   margin-left: -150px;
   margin-top: -150px;
+}
+
+#map {
+  background-color: #fdfdfd;
+  border: 1px solid #ccc;
+}
+.background {
+  fill: none;
+  pointer-events: all;
+}
+#countries, #states {
+  fill: #80A2A6;
+  stroke: #fff;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+#countries .active, #states .active {
+  fill: #89a;
+}
+#cities {
+  stroke-width: 0;
+}
+.city {
+  fill: #345;
+  stroke: #fff;
 }

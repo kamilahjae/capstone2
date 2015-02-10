@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Capstone2</title>
+  <title>Kamilah's Capstone</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
+  <script src="//d3js.org/d3.v3.min.js"></script>
+  <script src="//d3js.org/topojson.v1.min.js"></script>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
+
+  <meta charset="utf-8">
 </head>
 <body>
-  <nav class="navbar navbar-default">
-    <p class="navbar-text">Kamilah's Capstone</p>
-  </nav>
+  <div id="map"></div>
+
 <%= yield %>
 
 </body>
