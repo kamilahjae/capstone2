@@ -13,117 +13,120 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
 $("document").ready(function () {
-  var m_width = $("#map").width(),
-  width = 938,
-  height = 500,
-  country,
-  state;
-  var projection = d3.geo.mercator()
-  .scale(150)
-  .translate([width / 2, height / 1.5]);
+
+  //set the height and width of the projection
+  var width = 960,
+      height = 500,
+      active = d3.select(null); //make sure active is null by default, a safety measure
+
+  var projection = d3.geo.albersUsa() //this a projection of the US and PR with alaska next to Hawaii
+      .scale(1000) //how will the map initially appear in the browser (the size of it)
+      .translate([width / 2, height / 2]); //centering the map on the x & y axis
+
+  var zoom = d3.behavior.zoom() //zoom is a behavior with many attributes
+      .translate([0, 0])
+      .scale(1)
+      .scaleExtent([1, 8])
+      .on("zoom", zoomed);
+
   var path = d3.geo.path()
-  .projection(projection);
-  var svg = d3.select("#map").append("svg")
-  .attr("preserveAspectRatio", "xMidYMid")
-  .attr("viewBox", "0 0 " + width + " " + height)
-  .attr("width", m_width)
-  .attr("height", m_width * height / width);
+      .projection(projection);
+
+      // <svg id="map">
+
+      // </svg>
+
+  var svg = d3.select("#map").append("svg") //insert the svg into the map div
+      .attr("width", width) //add the width and height attributes to the svg
+      .attr("height", height)
+      .on("click", stopped, true); //on is a behavior listening for the click to happen on the svg
+
+      // <div class="map">
+      // <svg width="#{width}" height="#{height}">
+      //
+      // </svg>
+      // </div>
+
   svg.append("rect")
-  .attr("class", "background")
-  .attr("width", width)
-  .attr("height", height)
-  .on("click", country_clicked);
+      .attr("class", "background")
+      .attr("width", width)
+      .attr("height", height)
+      .on("click", reset);
+
+      // <div class="map">
+      // <svg width="#{width}" height="#{height}">
+      //
+      //   <rect class="background" width="#{width}" height="#{height}">
+      // </svg>
+      // </div>
+
   var g = svg.append("g");
-  d3.json("/countries.topo.json", function(error, us) {
-    g.append("g")
-    .attr("id", "countries")
-    .selectAll("path")
-    .data(topojson.feature(us, us.objects.countries).features)
-    .enter()
-    .append("path")
-    .attr("id", function(d) { return d.id; })
-    .attr("d", path)
-    .on("click", country_clicked);
+      // <div class="map">
+      // <svg width="#{width}" height="#{height}">
+      //
+      //   <rect class="background" width="#{width}" height="#{height}">
+      //   <g> (g stands for group)
+      // </svg>
+      // </div>
+
+  svg
+      //call means execute this function
+      .call(zoom) // delete this line to disable free zooming
+      .call(zoom.event);
+
+  d3.json("/states_usa.topo.json", function(error, us) { //read my topo.json file into the json function and then do something. like promises
+    console.log(error, us, "this is g:", g)
+    g.selectAll("path") //this will give an empty selector (a selector is a selection object), but it is still an empty instance of the d3 class that we can perform actions on
+        .data(topojson.feature(us, us.objects.states).features) //.data is a method that says that all actions will be performed on the data in the read file
+         //topojson is a class, feature (figure out paths for state lines? read more about this) is a method of that class and we are passing the us variable to that method
+      .enter().append("path") //enter tells d3 we will start manipulating this stuff--the data bound to the svg. Like a loop. will perform the following actions in sequence (this is how we get 50 paths for the states)
+        .attr("d", path)
+        .attr("class", "feature")
+        .on("click", clicked);
+
+    g.append("path")
+        .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))//the bordering lines are only sketched once
+        .attr("class", "mesh")
+        .attr("d", path);
   });
-  function zoom(xyz) {
-    g.transition()
-    .duration(750)
-    .attr("transform", "translate(" + projection.translate() + ")scale(" + xyz[2] + ")translate(-" + xyz[0] + ",-" + xyz[1] + ")")
-    .selectAll(["#countries", "#states", "#cities"])
-    .style("stroke-width", 1.0 / xyz[2] + "px")
-    .selectAll(".city")
-    .attr("d", path.pointRadius(20.0 / xyz[2]));
+
+  function clicked(d) {
+    if (active.node() === this) return reset(); //if you click on an already active state, zoom out
+    active.classed("active", false);
+    active = d3.select(this).classed("active", true);
+
+    var bounds = path.bounds(d), //read more about this. something about scaling. how the animation transforms between actions
+        dx = bounds[1][0] - bounds[0][0],
+        dy = bounds[1][1] - bounds[0][1],
+        x = (bounds[0][0] + bounds[1][0]) / 2,
+        y = (bounds[0][1] + bounds[1][1]) / 2,
+        scale = .9 / Math.max(dx / width, dy / height),
+        translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+    svg.transition() //anytime a transition occurs, take this amount of time. and call the following actions
+        .duration(750)
+        .call(zoom.translate(translate).scale(scale).event);
   }
-  function get_xyz(d) {
-    var bounds = path.bounds(d);
-    var w_scale = (bounds[1][0] - bounds[0][0]) / width;
-    var h_scale = (bounds[1][1] - bounds[0][1]) / height;
-    var z = .96 / Math.max(w_scale, h_scale);
-    var x = (bounds[1][0] + bounds[0][0]) / 2;
-    var y = (bounds[1][1] + bounds[0][1]) / 2 + (height / z / 6);
-    return [x, y, z];
+
+  function reset() {
+    active.classed("active", false);
+    active = d3.select(null);
+
+    svg.transition()
+        .duration(750)
+        .call(zoom.translate([0, 0]).scale(1).event);
   }
-  function country_clicked(d) {
-    g.selectAll(["#states", "#cities"]).remove();
-    state = null;
-    if (country) {
-      g.selectAll("#" + country.id).style('display', null);
-    }
-    if (d && country !== d) {
-      var xyz = get_xyz(d);
-      country = d;
-      if (d.id  == 'USA' || d.id == 'JPN') {
-        d3.json("/states_" + d.id.toLowerCase() + ".topo.json", function(error, us) {
-          g.append("g")
-          .attr("id", "states")
-          .selectAll("path")
-          .data(topojson.feature(us, us.objects.states).features)
-          .enter()
-          .append("path")
-          .attr("id", function(d) { return d.id; })
-          .attr("class", "active")
-          .attr("d", path)
-          .on("click", state_clicked);
-          zoom(xyz);
-          g.selectAll("#" + d.id).style('display', 'none');
-        });
-      } else {
-        zoom(xyz);
-      }
-    } else {
-      var xyz = [width / 2, height / 1.5, 1];
-      country = null;
-      zoom(xyz);
-    }
+
+  function zoomed() {
+    g.style("stroke-width", 1.5 / d3.event.scale + "px");
+    g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
   }
-  function state_clicked(d) {
-    g.selectAll("#cities").remove();
-    if (d && state !== d) {
-      var xyz = get_xyz(d);
-      state = d;
-      country_code = state.id.substring(0, 3).toLowerCase();
-      state_name = state.properties.name;
-      d3.json("/cities_" + country_code + ".topo.json", function(error, us) {
-        g.append("g")
-        .attr("id", "cities")
-        .selectAll("path")
-        .data(topojson.feature(us, us.objects.cities).features.filter(function(d) { return state_name == d.properties.state; }))
-        .enter()
-        .append("path")
-        .attr("id", function(d) { return d.properties.name; })
-        .attr("class", "city")
-        .attr("d", path.pointRadius(20 / xyz[2]));
-        zoom(xyz);
-      });
-    } else {
-      state = null;
-      country_clicked(country);
-    }
+
+  // If the drag behavior prevents the default click,
+  // also stop propagation so we don’t click-to-zoom.
+  function stopped() {
+    if (d3.event.defaultPrevented) d3.event.stopPropagation();
   }
-  $(window).resize(function() {
-    var w = $("#map").width();
-    svg.attr("width", w);
-    svg.attr("height", w * height / width);
-  });
 });
