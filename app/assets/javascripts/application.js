@@ -137,8 +137,9 @@ $("document").ready(function () {
 
   // create a function that resizes the map to the window size for responsiveness
   $(window).resize(function() {
-    var w = $("#map").width();
+    var w = $("#map").width(),
+        h = $("#map").height();
     svg.attr("width", w);
-    svg.attr("height", w * height / width);
+    svg.attr("height", h);
   });
 });

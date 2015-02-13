@@ -20,12 +20,12 @@
 <%= yield %>
   <footer class="footer">
     <div class="row">
-      <div class="col-md-4">
-        <%= button_to() %>
-        <%= button_to() %>
-        <%= button_to() %>
-      </div>
-    </div>
+      <div class="btnWrapper">
+        <div class="col-md-4"><%= button_to("Map") %></div>
+        <div class="col-md-4"><%= button_to("Chart") %></div>
+        <div class="col-md-4"><%= button_to("Worst States") %></div>
+      </div><!-- /btnWrapper -->
+    </div><!-- /row -->
   </footer>
   </div>
 </body>
