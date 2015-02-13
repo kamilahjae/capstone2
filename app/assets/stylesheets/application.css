@@ -18,14 +18,17 @@
   /*margin: 0 !important;*/
 }
 .navbar{
-  background-color: #222727;
+  background-color: #2F3030;
   border: none;
   border-radius: 0;
-  font: #fff;
   position: absolute;
   z-index: 1;
   width: 100%;
   height: 50px;
+}
+
+.navbar-text {
+  color: white !important;
 }
 
 .appWrapper {
@@ -39,12 +42,15 @@
  margin: 0;
 }*/
 
-.welcome {
-
+.wrap {
+  border: none;
+  border-radius: 0;
 }
 
 .infoPane {
-  background-color: #CFD6D7;
+  background-color: #EEF4F5;
+  border: none;
+  border-radius: 0;
   width: 100%;
   height: 100%;
   min-height: calc(100vh - 100px);
@@ -52,6 +58,14 @@
   margin: auto;
   display: block;
   float: left;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.infoPane h1 {
+  color: #16AEBA;
 }
 
 /*.welcome{
@@ -71,12 +85,12 @@
 }
 
 .feature {
-  fill: #ccc;
+  fill: #ACB7B8;
   cursor: pointer;
 }
 
 .feature.active {
-  fill: orange;
+  fill: #16AEBA;
 }
 
 .mesh {
@@ -105,8 +119,8 @@
 
 #map {
   /*background-color: red;*/
-  background-color: #fdfdfd;
-  border: 1px solid #ccc;
+  background-color: 206, 228, 229, 0.36;
+  border: none;
   width: 100%;
   min-height: calc(100vh - 100px);
 }
@@ -131,10 +145,16 @@
   stroke: #fff;
 }
 
+
 .footer{
-  background-color: #222727;
+  background-color: #2F3030;
   position: fixed;
   bottom: 0;
   width: 100%;
   height: 50px;
+}
+
+.btn {
+  background-color: #2F3030;
+  color: white;
 }
