@@ -17,11 +17,13 @@
 $("document").ready(function () {
 
   //set the height and width of the projection
-  var width = 960,
-      height = 500,
+  var width = $("#map").width(),
+      height = $("#map").height(),
+  // var width = $("#map").width(),
+  //     height = $("#map").height(),
       active = d3.select(null); //make sure active is null by default, a safety measure
 
-  var projection = d3.geo.albersUsa() //this a projection of the US and PR with alaska next to Hawaii
+  var projection = d3.geo.albersUsa() //this a projection of the US and PR with Alaska next to Hawaii
       .scale(1000) //how will the map initially appear in the browser (the size of it)
       .translate([width / 2, height / 2]); //centering the map on the x & y axis
 
@@ -38,9 +40,12 @@ $("document").ready(function () {
 
       // </svg>
 
+      //make the map responsive:
   var svg = d3.select("#map").append("svg") //insert the svg into the map div
-      .attr("width", width) //add the width and height attributes to the svg
-      .attr("height", height)
+      .attr("preserveAspectRatio", "xMidYMid")
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("width", width)
+      .attr("height", width * height / width)
       .on("click", stopped, true); //on is a behavior listening for the click to happen on the svg
 
       // <div class="map">
@@ -129,4 +134,11 @@ $("document").ready(function () {
   function stopped() {
     if (d3.event.defaultPrevented) d3.event.stopPropagation();
   }
+
+  // create a function that resizes the map to the window size for responsiveness
+  $(window).resize(function() {
+    var w = $("#map").width();
+    svg.attr("width", w);
+    svg.attr("height", w * height / width);
+  });
 });

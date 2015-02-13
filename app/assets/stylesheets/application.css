@@ -104,6 +104,7 @@
 }
 
 #map {
+  /*background-color: red;*/
   background-color: #fdfdfd;
   border: 1px solid #ccc;
   width: 100%;
