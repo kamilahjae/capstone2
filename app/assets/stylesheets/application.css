@@ -65,7 +65,11 @@
 }
 
 .infoPane h1 {
-  color: #16AEBA;
+  color: #05948f;
+}
+
+.infoPane p {
+  margin: .67em;
 }
 
 /*.welcome{
