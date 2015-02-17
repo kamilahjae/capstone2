@@ -18,7 +18,7 @@
   /*margin: 0 !important;*/
 }
 .navbar{
-  background-color: #424444;
+  background-color: #2F3030;
   border: none;
   border-radius: 0;
   position: absolute;
@@ -60,9 +60,6 @@
   float: left;
 }
 
-.centerText {
-  text-align: center;
-}
 
 .infoPane h1 {
   color: #05948f;
@@ -70,6 +67,9 @@
 
 .infoPane p {
   margin: .67em;
+}
+.centerText {
+  text-align: center;
 }
 
 /*.welcome{
@@ -151,7 +151,7 @@
 
 
 .footer{
-  background-color: #424444;
+  background-color: #2F3030;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -161,7 +161,11 @@
 .btnWrapper {
   background-color: black;
 }
-.button_to {
+.btn {
   background-color: #2F3030;
   color: white;
+}
+
+.btn:hover{
+  color: #05948f;
 }
