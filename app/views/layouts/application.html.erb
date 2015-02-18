@@ -12,10 +12,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+
+<nav class="navWrapper">
   <nav class="navbar navbar-default">
-    <p class="navbar-text">Kamilah's Capstone</p>
-  </nav>
-  <div class="container-fluid noPadding">
+    <p class="navTitle navbar-text">Kamilah's Capstone</p>
+    <div class="navTextWrapper">
+      <a href="/" class="navbar-text">About</a>
+      <a href="/" class="navbar-text ">Contact</a>
+    </div><!-- /navTextWrapper -->
+  </nav><!-- /navbar -->
+</nav><!-- /navWrapper -->
+
+<div class="container-fluid noPadding">
 
 <%= yield %>
   <footer class="footer">
@@ -27,6 +35,6 @@
       </div><!-- /row -->
     </div><!-- /btnWrapper -->
   </footer>
-  </div>
+</div><!-- /container-fluid -->
 </body>
 </html>
