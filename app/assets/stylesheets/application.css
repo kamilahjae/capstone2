@@ -17,6 +17,12 @@
   padding: 0 !important;
   /*margin: 0 !important;*/
 }
+
+.background {
+  fill: none;
+  pointer-events: all;
+}
+
 .navbar{
   background-color: #2F3030;
   border: none;
@@ -80,42 +86,10 @@
 .infoPane p {
   margin: .67em;
 }
+
 .centerText {
   text-align: center;
 }
-
-/*.welcome{
-  width: 500px;
-  height: 300px;55r,
-  border: 5px solid #000;
-  border-radius: 30px;
-  background: #BADA55;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.3);
-}*/
-
-/*start new code*/
-.background {
-  fill: none;
-  pointer-events: all;
-}
-
-.feature {
-  fill: #ACB7B8;
-  cursor: pointer;
-}
-
-.feature.active {
-  fill: #16AEBA;
-}
-
-.mesh {
-  fill: none;
-  stroke: #fff;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-/*end new code*/
 
 .center {
   width: 300px;
@@ -131,39 +105,6 @@
   background-color: red;
   width: 100%;
   min-height: calc(100vh - 100px);
-}
-
-#map {
-  /*background-color: red;*/
-  background-color: #fdfdfd;
-  border: none;
-  width: 100%;
-  min-height: calc(100vh - 100px);
-}
-
-.background {
-  fill: none;
-  pointer-events: all;
-}
-
-#countries, #states {
-  fill: #80A2A6;
-  stroke: #fff;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-}
-
-#countries .active, #states .active {
-  fill: #89a;
-}
-
-#cities {
-  stroke-width: 0;
-}
-
-.city {
-  fill: #345;
-  stroke: #fff;
 }
 
 .footer{

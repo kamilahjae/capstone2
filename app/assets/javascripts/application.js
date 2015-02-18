@@ -82,7 +82,7 @@ $("document").ready(function () {
       .call(zoom.event);
 
   d3.json("/states_usa.topo.json", function(error, us) { //read my topo.json file into the json function and then do something. like promises
-    console.log(error, us, "this is g:", g)
+    console.log(error, us, "this is g:", g);
     g.selectAll("path") //this will give an empty selector (a selector is a selection object), but it is still an empty instance of the d3 class that we can perform actions on
         .data(topojson.feature(us, us.objects.states).features) //.data is a method that says that all actions will be performed on the data in the read file
          //topojson is a class, feature (figure out paths for state lines? read more about this) is a method of that class and we are passing the us variable to that method
@@ -95,24 +95,48 @@ $("document").ready(function () {
         .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))//the bordering lines are only sketched once
         .attr("class", "mesh")
         .attr("d", path);
+
   });
 
   function clicked(d) {
+    g.selectAll("#cities").remove();
     if (active.node() === this) return reset(); //if you click on an already active state, zoom out
     active.classed("active", false);
     active = d3.select(this).classed("active", true);
 
-    var bounds = path.bounds(d), //read more about this. something about scaling. how the animation transforms between actions
+    var bounds = path.bounds(d), //read more about this. something about scaling; how the animation transforms between actions
         dx = bounds[1][0] - bounds[0][0],
         dy = bounds[1][1] - bounds[0][1],
         x = (bounds[0][0] + bounds[1][0]) / 2,
         y = (bounds[0][1] + bounds[1][1]) / 2,
-        scale = .9 / Math.max(dx / width, dy / height),
+        scale = 0.9 / Math.max(dx / width, dy / height),
         translate = [width / 2 - scale * x, height / 2 - scale * y];
 
     svg.transition() //anytime a transition occurs, take this amount of time. and call the following actions
         .duration(750)
         .call(zoom.translate(translate).scale(scale).event);
+
+    var state = d;
+        state_name = state.properties.name;
+        console.log("this is state info:", state);
+
+      d3.json("/cities_usa.topo.json", function(error, us) {
+        console.log("this is us:", us);
+        g.append("g")
+          .attr("id", "cities")
+          .selectAll("circle")
+          .data(topojson.feature(us, us.objects.cities).features.filter(function(d) { return state_name == d.properties.state; }))
+          .enter()
+          .append("circle")
+          .attr("cx", function(d) { console.log("This should be the city block:", d);
+            return projection([d.geometry.coordinates[0], d.geometry.coordinates[1]])[0];
+          })
+          .attr("cy", function(d) {
+            return projection([d.geometry.coordinates[0], d.geometry.coordinates[1]])[1];
+          })
+          .attr("r", 3)
+          .style("fill", "rgb(11, 84, 86)");
+      });
   }
 
   function reset() {
