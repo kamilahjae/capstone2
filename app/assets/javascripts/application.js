@@ -95,7 +95,6 @@ $("document").ready(function () {
         .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))//the bordering lines are only sketched once
         .attr("class", "mesh")
         .attr("d", path);
-
   });
 
   function clicked(d) {
@@ -120,23 +119,23 @@ $("document").ready(function () {
         state_name = state.properties.name;
         console.log("this is state info:", state);
 
-      d3.json("/cities_usa.topo.json", function(error, us) {
-        console.log("this is us:", us);
-        g.append("g")
-          .attr("id", "cities")
-          .selectAll("circle")
-          .data(topojson.feature(us, us.objects.cities).features.filter(function(d) { return state_name == d.properties.state; }))
-          .enter()
-          .append("circle")
-          .attr("cx", function(d) { console.log("This should be the city block:", d);
-            return projection([d.geometry.coordinates[0], d.geometry.coordinates[1]])[0];
-          })
-          .attr("cy", function(d) {
-            return projection([d.geometry.coordinates[0], d.geometry.coordinates[1]])[1];
-          })
-          .attr("r", 3)
-          .style("fill", "rgb(11, 84, 86)");
-      });
+    d3.json("/cities_usa.topo.json", function(error, us) {
+      console.log("this is us:", us);
+      g.append("g")
+        .attr("id", "cities")
+        .selectAll("circle")
+        .data(topojson.feature(us, us.objects.cities).features.filter(function(d) { return state_name == d.properties.state; }))
+        .enter()
+        .append("circle")
+        .attr("cx", function(d) { console.log("This should be the city block:", d);
+          return projection([d.geometry.coordinates[0], d.geometry.coordinates[1]])[0];
+        })
+        .attr("cy", function(d) {
+          return projection([d.geometry.coordinates[0], d.geometry.coordinates[1]])[1];
+        })
+        .attr("r", 3)
+        .style("fill", "rgb(11, 84, 86)");
+    });
   }
 
   function reset() {
