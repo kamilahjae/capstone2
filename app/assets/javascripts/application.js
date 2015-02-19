@@ -97,8 +97,6 @@ $("document").ready(function () {
         .attr("d", path);
   });
 
-
-
   function clicked(d) {
     g.selectAll("#cities").remove();
     if (active.node() === this) return reset(); //if you click on an already active state, zoom out
@@ -119,17 +117,27 @@ $("document").ready(function () {
 
     var state = d;
         state_name = state.properties.name;
-        console.log("this is state info:", state);
+        console.log("this is state info: ", state);
 
+    //append state_name of the state to the infoPane header:
+    var infoPane = d3.select(".infoPane");
+
+    infoPane.selectAll("h1")
+      .text(state_name);
+
+    //add tooltip to the city points
     var tip = d3.tip()
       .attr('class', 'd3-tip')
       .offset([-10, 0])
       .html(function(d) {
-        return "<strong>City:</strong> <span style='color:orange'>" + d.properties.name + "</span>";
+        return "<strong>City:</strong> <span style='color:orange'>" +
+        d.properties.name +
+        "</span>";
       });
 
     svg.call(tip);
 
+    //load the cities onto the map
     d3.json("/cities_usa.topo.json", function(error, us) {
       console.log("this is us:", us);
       g.append("g")
