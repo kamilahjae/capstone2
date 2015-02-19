@@ -77,9 +77,9 @@ $("document").ready(function () {
       // </div>
 
   svg
-      //call means execute this function
-      .call(zoom) // delete this line to disable free zooming
-      .call(zoom.event);
+    //call means execute this function
+    .call(zoom) // delete this line to disable free zooming
+    .call(zoom.event);
 
   d3.json("/states_usa.topo.json", function(error, us) { //read my topo.json file into the json function and then do something. like promises
     console.log(error, us, "this is g:", g);
@@ -96,6 +96,8 @@ $("document").ready(function () {
         .attr("class", "mesh")
         .attr("d", path);
   });
+
+
 
   function clicked(d) {
     g.selectAll("#cities").remove();
@@ -136,9 +138,17 @@ $("document").ready(function () {
         .attr("r", 3)
         .style("fill", "rgb(11, 84, 86)");
     });
+
+    // var tip = d3.tip()
+    //   .attr('class', 'd3-tip')
+    //   .offset([-10, 0])
+    //   .html(function(d) {
+    //     return "<strong>City:</strong> <span style='color:orange'>" + d.frequency + "</span>";
+    //   });
   }
 
   function reset() {
+    g.selectAll("#cities").remove();
     active.classed("active", false);
     active = d3.select(null);
 
