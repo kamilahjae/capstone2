@@ -121,9 +121,9 @@ $("document").ready(function () {
 
     //append state_name of the state to the infoPane header:
     var infoPane = d3.select(".infoPane");
+        infoPaneH1 = infoPane.selectAll("h1");
 
-    infoPane.selectAll("h1")
-      .text(state_name);
+        infoPaneH1.text(state_name);
 
     //add tooltip to the city points
     var tip = d3.tip()
