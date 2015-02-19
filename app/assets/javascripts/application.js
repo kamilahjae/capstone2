@@ -15,6 +15,8 @@
 //= require_tree .
 
 $("document").ready(function () {
+  //grab the initial h1 info
+  var firstInfoPaneH1 = d3.select(".infoPane");
 
   //set the height and width of the projection
   var width = $("#map").width(),
@@ -119,9 +121,9 @@ $("document").ready(function () {
         state_name = state.properties.name;
         console.log("this is state info: ", state);
 
-    //append state_name of the state to the infoPane header:
+    //append state_name of the state to infoPaneMain h1 element(s):
     var infoPane = d3.select(".infoPane");
-        infoPaneH1 = infoPane.selectAll("h1");
+        infoPaneH1 = infoPane.selectAll(".infoPaneMain");
 
         infoPaneH1.text(state_name);
 
