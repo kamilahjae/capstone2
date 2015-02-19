@@ -15,8 +15,10 @@
 //= require_tree .
 
 $("document").ready(function () {
-  //grab the initial h1 info
-  var firstInfoPaneH1 = d3.select(".infoPane");
+  //grab the text of the initial infoPane h1
+  var firstInfoPaneH1 = d3.select(".infoPane")
+    .selectAll(".infoPaneMain").text();
+    console.log("This is the h1 text: ", firstInfoPaneH1);
 
   //set the height and width of the projection
   var width = $("#map").width(),
@@ -163,10 +165,14 @@ $("document").ready(function () {
   }
 
   function reset() {
-    g.selectAll("#cities").remove(); //clear points when user clicks white space
+    g.selectAll("#cities").remove(); //clear points when user exits state
     active.classed("active", false);
     active = d3.select(null);
 
+    //change infoPane h1 state_name text to intro text when user exits state
+    infoPaneH1.text(firstInfoPaneH1);
+
+    //set zoom out transition
     svg.transition()
         .duration(750)
         .call(zoom.translate([0, 0]).scale(1).event);
