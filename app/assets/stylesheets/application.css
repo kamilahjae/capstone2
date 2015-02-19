@@ -32,6 +32,7 @@
   width: 100%;
   height: 50px;
 
+  /*add shadow to bottom*/
   -webkit-box-shadow: 0 3px 3px #3c3c40;
   -moz-box-shadow: 0 3px 3px #3c3c40;
   box-shadow: 0 3px 3px #3c3c40;
@@ -118,16 +119,28 @@
 
 .btnWrapper {
   /*background-color: black;*/
-  position: fixed;
+  position: relative;
   bottom: 0;
   width: 100%;
-  height: 50px;
+  height: 100%;
+
+  /*background-image: -moz-linear-gradient(bottom, #2F3030, black);
+  background-image: -ms-linear-gradient(bottom, #2F3030, black);
+  background-image: -webkit-linear-gradient(bottom, #2F3030, black);
+  background-image: linear-gradient(bottom, #2F3030,black);*/
 
 }
 
 .btn {
   background-color: black;
   color: white;
+  margin-top: 1%;
+  height: 100%;
+
+  background-image: -moz-radial-gradient(bottom, #2F3030, #0f0f0f);
+  background-image: -ms-radial-gradient(bottom, #2F3030, #0f0f0f);
+  background-image: -webkit-radial-gradient(bottom, #2F3030, #0f0f0f);
+  background-image: radial-gradient(bottom, #2F3030, #0f0f0f);
 }
 
 .btn:hover{
@@ -135,19 +148,19 @@
 }
 
 .footer{
-  background-color: #2F3030;
+  background-color: #1e1e1f;
   position: fixed;
   bottom: 0;
   width: 100%;
   height: 50px;
 
-  add shadow top
+  /*add shadow to top*/
   -webkit-box-shadow: 0 -3px 3px #3c3c40;
   -moz-box-shadow: 0 -3px 3px #3c3c40;
   box-shadow: 0 -3px 3px #3c3c40;
 
-  background-image: -moz-linear-gradient(bottom, #535357, black);
+  /*background-image: -moz-linear-gradient(bottom, #535357, black);
   background-image: -ms-linear-gradient(bottom, #535357, black);
   background-image: -webkit-linear-gradient(bottom, #535357, black);
-  background-image: linear-gradient(bottom, #535357,black);
+  background-image: linear-gradient(bottom, #535357,black);*/
 }
