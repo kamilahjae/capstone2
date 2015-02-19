@@ -121,6 +121,15 @@ $("document").ready(function () {
         state_name = state.properties.name;
         console.log("this is state info:", state);
 
+    var tip = d3.tip()
+      .attr('class', 'd3-tip')
+      .offset([-10, 0])
+      .html(function(d) {
+        return "<strong>City:</strong> <span style='color:orange'>" + d.properties.name + "</span>";
+      });
+
+    svg.call(tip);
+
     d3.json("/cities_usa.topo.json", function(error, us) {
       console.log("this is us:", us);
       g.append("g")
@@ -136,19 +145,15 @@ $("document").ready(function () {
           return projection([d.geometry.coordinates[0], d.geometry.coordinates[1]])[1];
         })
         .attr("r", 3)
-        .style("fill", "rgb(11, 84, 86)");
-    });
+        .style("fill", "rgb(11, 84, 86)")
+        .on('mouseover', tip.show)
+        .on('mouseout', tip.hide);
 
-    // var tip = d3.tip()
-    //   .attr('class', 'd3-tip')
-    //   .offset([-10, 0])
-    //   .html(function(d) {
-    //     return "<strong>City:</strong> <span style='color:orange'>" + d.frequency + "</span>";
-    //   });
+    });
   }
 
   function reset() {
-    g.selectAll("#cities").remove();
+    g.selectAll("#cities").remove(); //clear points when user clicks white space
     active.classed("active", false);
     active = d3.select(null);
 
