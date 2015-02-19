@@ -31,27 +31,10 @@ body {
   font: 10px sans-serif;
 }
 
-.axis path, .axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.bar {
-  fill: orange;
-}
-
-.bar:hover {
-  fill: orangered ;
-}
-
-.x.axis path {
-  display: none;
-}
-
 .d3-tip {
   line-height: 1;
   font-weight: bold;
+  font-size: 18px;
   padding: 12px;
   background: rgba(0, 0, 0, 0.8);
   color: #fff;
@@ -62,7 +45,7 @@ body {
 .d3-tip:after {
   box-sizing: border-box;
   display: inline;
-  font-size: 10px;
+  font-size: 14px;
   width: 100%;
   line-height: 1;
   color: rgba(0, 0, 0, 0.8);
