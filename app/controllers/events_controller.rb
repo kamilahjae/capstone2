@@ -2,11 +2,11 @@ require "csv"
 class EventsController < ApplicationController
 
   def index
-    @state  = []
-    @total  = []
-    @male   = []
-    @female = []
-    @maleFemale = []
+    @state      = [] #state names
+    @total      = [] #total men and women
+    @male       = [] #men with diplomas
+    @female     = [] #women with diplomas
+    @maleFemale = [] #men and women with diplomas
 
     @ratio = []
 
@@ -18,7 +18,7 @@ class EventsController < ApplicationController
 
       @maleFemale << row[11].to_i + row[29].to_i
 
-      @ratio << (row[11].to_f + row[29].to_f) / row[3].to_f
+      @ratio      << (row[11].to_f + row[29].to_f) / row[3].to_f
     end
   end
 
