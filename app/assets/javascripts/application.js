@@ -15,10 +15,14 @@
 //= require_tree .
 
 $("document").ready(function () {
-  //grab the text of the initial infoPane h1
+  //grab the text of the initial infoPane h1 and p
   var firstInfoPaneH1 = d3.select(".infoPane")
-    .selectAll(".infoPaneMain").text();
+    .selectAll("#infoPaneMainH1").text();
     console.log("This is the h1 text: ", firstInfoPaneH1);
+
+  var firstInfoPaneP = d3.select(".infoPane")
+    .selectAll("#infoPaneMainP").text();
+    console.log("This is the p text: ", firstInfoPaneP);
 
   //set the height and width of the projection
   var width = $("#map").width(),
@@ -125,9 +129,11 @@ $("document").ready(function () {
 
     //append state_name of the state to infoPaneMain h1 element(s):
     var infoPane = d3.select(".infoPane");
-        infoPaneH1 = infoPane.selectAll(".infoPaneMain");
+        infoPaneH1 = infoPane.selectAll("#infoPaneMainH1");
 
         infoPaneH1.text(state_name);
+
+    //append state stats here:
 
     //add tooltip to the city points
     var tip = d3.tip()
