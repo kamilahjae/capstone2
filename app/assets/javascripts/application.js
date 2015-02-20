@@ -86,7 +86,7 @@ $("document").ready(function () {
 
   svg
     //call means execute this function
-    // .call(zoom) // delete this line to disable free zooming
+    .call(zoom) // delete this line to disable free zooming
     .call(zoom.event);
 
   d3.json("/states_usa.topo.json", function(error, us) { //read my topo.json file into the json function and then do something. like promises
