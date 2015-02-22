@@ -134,6 +134,31 @@ $("document").ready(function () {
         infoPaneH1.text(state_name);
 
     //append state stats here:
+    var data;
+
+    d3.json("/issues.json", function(error, json) {
+      if (error) return console.warn(error);
+      data = json;
+      console.log("DATA: ", data);
+      data.forEach(function(issue){
+        console.log(issue.state);
+        showIssue(issue);
+      });
+    });
+
+    function showIssue(issue_object) {
+      console.log(issue_object);
+      var infoPaneP = infoPane.selectAll("#infoPaneMainP");
+      if (issue_object.state === state_name) return (
+
+        infoPaneP.text([
+
+          issue_object.name + ":" +
+          "In " + issue_object.year +  issue_object.description + " of" +
+           issue_object.race + "s"
+        ])
+      );
+    }
 
     //add tooltip to the city points
     var tip = d3.tip()
