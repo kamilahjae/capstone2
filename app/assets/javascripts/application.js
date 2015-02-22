@@ -151,12 +151,15 @@ $("document").ready(function () {
       var infoPaneP = infoPane.selectAll("#infoPaneMainP");
       if (issue_object.state === state_name) return (
 
-        infoPaneP.text([
+        infoPaneP.data([issue_object])
+        .text(function(d){return "In " + d.year + ", " +
+          issue_object.description + " of " + issue_object.race + " students " +
+          "obtained a high school diploma."
+          ;})
 
-          issue_object.name + ":" +
-          "In " + issue_object.year +  issue_object.description + " of" +
-           issue_object.race + "s"
-        ])
+        //   issue_object.name + ":" +
+
+        .style("font-size", 40 + "px")
       );
     }
 
