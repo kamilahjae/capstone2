@@ -8,7 +8,7 @@ $("document").ready(function () {
     console.log("This is the h1 text: ", firstInfoPaneH1);
 
   var firstInfoPaneP = d3.select(".infoPane")
-    .selectAll("#infoPaneMainP").text();
+    .selectAll("#infoPaneMainP").text()
     console.log("This is the p text: ", firstInfoPaneP);
 
   //set the height and width of the projection
@@ -120,6 +120,7 @@ $("document").ready(function () {
 
         infoPaneH1.text(state_name);
 
+
     //append state stats here:
     var data;
 
@@ -192,6 +193,14 @@ $("document").ready(function () {
 
     //change infoPane h1 state_name text to intro text when user exits state
     infoPaneH1.text(firstInfoPaneH1);
+
+    //refactor this--make infoPaneP global.
+    //change infoPane p text to intro txt when user exists state
+    var infoPane = d3.select(".infoPane");
+        infoPaneP = infoPane.selectAll("#infoPaneMainP");
+
+        infoPaneP.text(firstInfoPaneP)
+        .style("font-size", 28 + "px");
 
     //set zoom out transition
     svg.transition()
