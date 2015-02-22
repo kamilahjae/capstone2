@@ -8,7 +8,7 @@ $("document").ready(function () {
     console.log("This is the h1 text: ", firstInfoPaneH1);
 
   var firstInfoPaneP = d3.select(".infoPane")
-    .selectAll("#infoPaneMainP").text()
+    .selectAll("#infoPaneMainP").text();
     console.log("This is the p text: ", firstInfoPaneP);
 
   //set the height and width of the projection
