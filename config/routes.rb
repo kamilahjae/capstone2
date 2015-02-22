@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "/contact", to: "home#contact", as: :contact
 
   resources :events
+  resources :issues
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

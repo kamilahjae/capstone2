@@ -1,6 +1,5 @@
 require "csv"
 class EventsController < ApplicationController
-
   def index
     @state      = [] #state names
     @total      = [] #total men and women
@@ -20,9 +19,5 @@ class EventsController < ApplicationController
 
       @ratio      << (row[11].to_f + row[29].to_f) / row[3].to_f
     end
-  end
-
-  def show
-    # redirect_to "show"
   end
 end
