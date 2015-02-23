@@ -35,7 +35,6 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
-    c3-rails (0.4.8)
     capistrano (3.3.5)
       capistrano-stats (~> 1.1.0)
       i18n
@@ -151,7 +150,6 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
-  c3-rails
   capistrano
   capistrano-bundler
   capistrano-passenger

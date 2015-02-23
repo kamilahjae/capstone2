@@ -62,3 +62,37 @@
 #infoPaneMainP {
   font-size: 28px;
 }
+
+.about {
+  background-color: #EEF4F5;
+  text-align: center;
+}
+
+.abtTxt {
+  left: 50%;
+  top: 50%;
+  margin: 5% 10%;
+  font-size: 28px;
+}
+
+.abtContent {
+  text-align: left;
+  // min-width: calc(50vh - 50px);
+
+}
+
+.abtContent p {
+  margin-left: 0;
+}
+
+.highlight {
+  color: #05948f;
+}
+
+.highlight p {
+  margin-right: 0;
+}
+
+.keyContent {
+  margin-bottom: 300px;
+}

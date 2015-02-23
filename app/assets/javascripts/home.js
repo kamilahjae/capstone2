@@ -156,7 +156,7 @@ $("document").ready(function () {
       .attr('class', 'd3-tip')
       .offset([-10, 0])
       .html(function(d) {
-        return "<strong>City:</strong> <span style='color:orange'>" +
+        return "<strong>City:</strong> <span style='color:rgb(252, 163, 0)'>" +
         d.properties.name +
         "</span>";
       });
