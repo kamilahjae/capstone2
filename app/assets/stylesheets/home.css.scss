@@ -66,12 +66,13 @@
 .about {
   background-color: #EEF4F5;
   text-align: center;
+  padding-top: 5%;
 }
 
 .abtTxt {
   left: 50%;
   top: 50%;
-  margin: 5% 10%;
+  margin: 0 10%;
   font-size: 28px;
 }
 
@@ -95,4 +96,10 @@
 
 .keyContent {
   margin-bottom: 300px;
+}
+
+.contentCtr {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
 }
