@@ -110,8 +110,8 @@ $("document").ready(function () {
         .duration(750)
         .call(zoom.translate(translate).scale(scale).event);
 
-    var state = d,
-        state_name = state.properties.name;
+    var state = d;
+    var state_name = state.properties.name;
         console.log("this is state info: ", state);
 
     //append state_name of the state to infoPaneMain h1 element(s):
