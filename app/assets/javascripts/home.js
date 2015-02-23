@@ -110,7 +110,7 @@ $("document").ready(function () {
         .duration(750)
         .call(zoom.translate(translate).scale(scale).event);
 
-    var state = d;
+    var state = d,
         state_name = state.properties.name;
         console.log("this is state info: ", state);
 
@@ -125,7 +125,7 @@ $("document").ready(function () {
     var data;
 
     d3.json("/issues.json", function(error, json) {
-      if (error) return console.warn(error);
+      if (error) console.warn(error);
       data = json;
       console.log("DATA: ", data);
       data.forEach(function(issue){
