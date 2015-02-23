@@ -116,7 +116,7 @@ $("document").ready(function () {
 
     //append state_name of the state to infoPaneMain h1 element(s):
     var infoPane = d3.select(".infoPane");
-        infoPaneH1 = infoPane.selectAll("#infoPaneMainH1");
+    var infoPaneH1 = infoPane.selectAll("#infoPaneMainH1");
 
         infoPaneH1.text(state_name);
 
@@ -137,18 +137,21 @@ $("document").ready(function () {
     function showIssue(issue_object) {
       console.log(issue_object);
       var infoPaneP = infoPane.selectAll("#infoPaneMainP");
-      if (issue_object.state === state_name) return (
+      if (issue_object.state === state_name) {
+        return (
 
         infoPaneP.data([issue_object])
         .text(function(d){return "In " + d.year + ", " +
           issue_object.description + " of " + issue_object.race + " students " +
           "obtained a high school diploma."
+
           ;})
 
         //   issue_object.name + ":" +
 
         .style("font-size", 40 + "px")
       );
+    }
     }
 
     //add tooltip to the city points
