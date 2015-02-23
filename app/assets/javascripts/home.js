@@ -200,7 +200,7 @@ $("document").ready(function () {
     //refactor this--make infoPaneP global.
     //change infoPane p text to intro txt when user exists state
     var infoPane = d3.select(".infoPane");
-        infoPaneP = infoPane.selectAll("#infoPaneMainP");
+    var infoPaneP = infoPane.selectAll("#infoPaneMainP");
 
         infoPaneP.text(firstInfoPaneP)
         .style("font-size", 28 + "px");
