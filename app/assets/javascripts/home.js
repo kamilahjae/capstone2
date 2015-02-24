@@ -92,6 +92,8 @@ $("document").ready(function () {
         .attr("d", path);
   });
 
+  var infoPaneH1;
+
   function clicked(d) {
     g.selectAll("#cities").remove();
     if (active.node() === this) return reset(); //if you click on an already active state, zoom out
@@ -116,7 +118,7 @@ $("document").ready(function () {
 
     //append state_name of the state to infoPaneMain h1 element(s):
     var infoPane = d3.select(".infoPane");
-    var infoPaneH1 = infoPane.selectAll("#infoPaneMainH1");
+        infoPaneH1 = infoPane.selectAll("#infoPaneMainH1");
 
         infoPaneH1.text(state_name);
 
